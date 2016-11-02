@@ -177,13 +177,14 @@ var q10 = {
 
 var questionArray = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10];
 
-function loadQuestion() {
-  $(".question").html("<h3>" + questionArray[index].question + "</h3>");
-  $("#buttonA").text(questionArray[index].possibleAnswers[0]).show();
-  $("#buttonB").text(questionArray[index].possibleAnswers[1]).show();
-  $("#buttonC").text(questionArray[index].possibleAnswers[2]).show();
-  $("#buttonD").text(questionArray[index].possibleAnswers[3]).show();
-  getAnswer();  
+function loadQuestion(questionSelection) {
+	console.log(questionSelection);
+  $(".question").html("<h3>" + questionArray[questionSelection].question + "</h3>");
+  $("#buttonA").text(questionArray[questionSelection].possibleAnswers[0]).show();
+  $("#buttonB").text(questionArray[questionSelection].possibleAnswers[1]).show();
+  $("#buttonC").text(questionArray[questionSelection].possibleAnswers[2]).show();
+  $("#buttonD").text(questionArray[questionSelection].possibleAnswers[3]).show();
+//  getAnswer();  
 //  nextQuestion(index);
 }
 
@@ -197,7 +198,7 @@ function setup() {
 	$('.question').append('<button id="startButton">Start</button>');
 	$('#startButton').on('click', function() {
 		$(this).hide();
-	 	loadQuestion();
+	 	loadQuestion(index);
 	});
 }		
 
@@ -240,6 +241,23 @@ function getAnswer() {
 
 //}
 setup();
+$('.answerchoice').on('click', function() {
+ index++;
+ if((this) == $('#buttonA')) {
+ 	console.log("A");
+ }
+ $(".question").text('');
+ $("#buttonA").text('');
+ $("#buttonB").text('');
+ $("#buttonC").text('');
+ $("#buttonD").text('');
+ if (index < questionArray.length) {
+ 	loadQuestion(index);
+ } else {
+ 	$(".answerchoice").hide();
+ 	showScore;
+ }
+});
 
 
 //	$('#start').click(countdownTimer.start);
