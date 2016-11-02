@@ -16,6 +16,8 @@ $(document).ready(function() {
 			if (countdownTimer.time > 0) {
 				countdownTimer.time--;
 				$('.timer').html(countdownTimer.time);
+			} else {
+				countdownTimer.reset();
 			}
 		}
 	}
@@ -145,7 +147,7 @@ var q7 = {
 
 var q8 = {
 	question : 'Which Walt Disney World location opened on the same day as the Disney-MGM Studios theme park on May 1, 1989?',
-	possibleAnswers : 'A. Typhoon Lagoon',
+	possibleAnswers : ['A. Typhoon Lagoon',
 				 'B. Pleasure Island',
 				 'C. Both A & B',
 				 'D. None of the above'],
@@ -164,7 +166,7 @@ var q9 = {
 };
 
 var q10 = {
-	question : 'Which wartime activity did the Walt Disney Studios partake in to support the American war effort?'],
+	question : 'Which wartime activity did the Walt Disney Studios partake in to support the American war effort?',
 	possibleAnswers : ['A. Recycling used film footage',
 				  'B. Designing US Army & US Navy insignia',
 				  'C. Hosted a Studio Victory Garden where employees grew food for their families',
@@ -176,16 +178,20 @@ var q10 = {
 var questionArray = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10];
 
 function setup() {
-	countdownTimer.start();
+
 	$('.question').append('<button id="startButton">Start</button>');
 	$('#startButton').on('click', function() {
-		$('.timer').html(countdownTimer.time);
-		$('.question').html('');
+		for (var i = 0; i < questionArray.length; i++) {
+			countdownTimer.start();
+			$('.timer').html(countdownTimer.time);
+			$('.question').html(questionArray[i].question);
+
+		}
 	});
-	$('#startButton').click(countdownTimer.start);
+//	$('#startButton').click(countdownTimer.start);
 
 }
-		setup();
+setup();
 
 
 //	$('#start').click(countdownTimer.start);
