@@ -193,19 +193,20 @@ function loadQuestion() {
 //}
 
 function setup() {
-//	index = 0;
+	index = 0;
 	$('.question').append('<button id="startButton">Start</button>');
 	$('#startButton').on('click', function() {
 		$(this).hide();
-	 	loadQuestion(index);
+	 	loadQuestion();
 	});
 }		
 
 function getAnswer() {
-	index++;
+
 //  nextQuestion();
-  console.log('alert', index);
 	$('.answerchoice').on('click', function() {
+	  console.log('alert', index);
+		index++;
 		console.log('click', index);
 		$(".question").text('');
 		$("#buttonA").text('');
