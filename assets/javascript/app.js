@@ -75,6 +75,8 @@ $(document).ready(function() {
 				  'D. Forced employees to carpool by closing parking lots to non-carpool cars']		 						
 	}
 */
+var correct = 0;
+var wrong = 0;
 var q1 = {
 	question : 'Who was the host for Kitchen Kabaret?',
 	possibleAnswers : ['A. Fud Wrapper',
@@ -217,6 +219,21 @@ function getAnswer() {
 		loadQuestion();
 	})
 }
+
+function answerCorrect() {
+	correct++;
+	console.log("correct");
+}
+
+function answerWrong() {
+	wrong++;
+	console.log("wrong");
+}
+
+function showScore() {
+	$('.question').append("<p>" + correct + " correct</p>");
+	$('.question').append("<p>" + wrong + " incorrect</p>");
+}
 //		for (var i=0; i<questionArray.length; i++) {
 //			$('.question').append('<p>'+questionArray[i].question+'</p>');
 //			for (var j=0; j<questionArray[i].possibleAnswers.length; j++) {
@@ -242,20 +259,48 @@ function getAnswer() {
 //}
 setup();
 $('.answerchoice').on('click', function() {
- index++;
- if((this) == $('#buttonA')) {
- 	console.log("A");
+ console.log($(this));
+ if(this.id == 'buttonA') {
+ 	var answerChosen = 'A';
+ } else if(this.id == 'buttonB') {
+ 	answerChosen = 'B';
+ } else if (this.id == 'buttonC') {
+ 	answerChosen = 'C';
+ } else if (this.id == 'buttonD') {
+ 	answerChosen = 'D';
+ } 
+ if ((answerChosen == 'A') && (questionArray[index].flags[0] == true)) {
+ 	answerCorrect();
+ } else if (answerChosen == 'A') {
+ 	answerWrong();
  }
+ if ((answerChosen == 'B') && (questionArray[index].flags[1] == true)) {
+ 	answerCorrect();
+ } else if (answerChosen == 'B') {
+ 	answerWrong();
+ }
+if ((answerChosen == 'C') && (questionArray[index].flags[2] == true)) {
+ 	answerCorrect();
+ } else if (answerChosen == 'C') {
+ 	answerWrong();
+ }
+if ((answerChosen == 'D') && (questionArray[index].flags[3] == true)) {
+ 	answerCorrect();
+ } else if (answerChosen == 'D') {
+ 	answerWrong();
+ }
+
  $(".question").text('');
  $("#buttonA").text('');
  $("#buttonB").text('');
  $("#buttonC").text('');
  $("#buttonD").text('');
+ index++;
  if (index < questionArray.length) {
  	loadQuestion(index);
  } else {
  	$(".answerchoice").hide();
- 	showScore;
+ 	showScore();
  }
 });
 
