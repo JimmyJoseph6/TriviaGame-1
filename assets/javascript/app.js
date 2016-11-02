@@ -1,26 +1,27 @@
 $(document).ready(function() {
 	var index = 0;
 	var countdownTimer = {
-		time : 30,
+		time : 5,
 		reset: function() {
-			(this).time = 30;
-			$('.timer').html('<h3>' + (this).time + ' seconds remaining</h3>');
+			this.time = 5;
+			$('.timer').html('<h3>' + this.time + ' seconds remaining</h3>');
 		},
 		start: function() {
-			counter = setInterval((this).count, 1000);	
+			counter = setInterval(countdownTimer.count, 1000);	
 		},
 		stop: function() {
 			clearInterval(counter);
 		},
 		count: function() {
-			if ((this).time > 0) {
-				(this).time--;
-				$('.timer').html('<h3>' + (this).time + ' seconds remaining</h3>');
-			} else {
+				this.time--;
+				console.log(this.time);
+				$('.timer').html(this.time);
+			if (this.time > 0) {
+				$('.timer').html('<h3>' + this.time + ' seconds remaining</h3>');
 //				(this).reset();
 			}
 		}
-	}
+	};
 /*
 	var trivia = {
 		questions: ['Who was the host for Kitchen Kabaret?',
