@@ -1,23 +1,23 @@
 $(document).ready(function() {
-
+	var index = 0;
 	var countdownTimer = {
 		time : 30,
 		reset: function() {
-			countdownTimer.time = 30;
-			$('.timer').html('<h3>' + countdownTimer.time + ' seconds remaining</h3>');
+			(this).time = 30;
+			$('.timer').html('<h3>' + (this).time + ' seconds remaining</h3>');
 		},
 		start: function() {
-			counter = setInterval(countdownTimer.count, 1000);	
+			counter = setInterval((this).count, 1000);	
 		},
 		stop: function() {
 			clearInterval(counter);
 		},
 		count: function() {
-			if (countdownTimer.time > 0) {
-				countdownTimer.time--;
-				$('.timer').html(countdownTimer.time);
+			if ((this).time > 0) {
+				(this).time--;
+				$('.timer').html('<h3>' + (this).time + ' seconds remaining</h3>');
 			} else {
-				countdownTimer.reset();
+//				(this).reset();
 			}
 		}
 	}
@@ -177,20 +177,67 @@ var q10 = {
 
 var questionArray = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10];
 
-function setup() {
+function loadQuestion() {
+  $(".question").html("<h3>" + questionArray[index].question + "</h3>");
+  $("#buttonA").text(questionArray[index].possibleAnswers[0]).show();
+  $("#buttonB").text(questionArray[index].possibleAnswers[1]).show();
+  $("#buttonC").text(questionArray[index].possibleAnswers[2]).show();
+  $("#buttonD").text(questionArray[index].possibleAnswers[3]).show();
+  getAnswer();  
+//  nextQuestion(index);
+}
 
+//function nextQuestion() {
+//	index = index++;
+//	console.log(index);
+//}
+
+function setup() {
+//	index = 0;
 	$('.question').append('<button id="startButton">Start</button>');
 	$('#startButton').on('click', function() {
-		for (var i = 0; i < questionArray.length; i++) {
-			countdownTimer.start();
-			$('.timer').html(countdownTimer.time);
-			$('.question').html(questionArray[i].question);
-
-		}
+		$(this).hide();
+	 	loadQuestion(index);
 	});
+}		
+
+function getAnswer() {
+	index++;
+//  nextQuestion();
+  console.log('alert', index);
+	$('.answerchoice').on('click', function() {
+		console.log('click', index);
+		$(".question").text('');
+		$("#buttonA").text('');
+		$("#buttonB").text('');
+		$("#buttonC").text('');
+		$("#buttonD").text('');
+		loadQuestion();
+	})
+}
+//		for (var i=0; i<questionArray.length; i++) {
+//			$('.question').append('<p>'+questionArray[i].question+'</p>');
+//			for (var j=0; j<questionArray[i].possibleAnswers.length; j++) {
+//				$('.answers').append('<span><button id="possibleAnswer">' + questionArray[i].possibleAnswers[j]+ '</button></span>');
+//			}
+//			$('#possibleAnswers').on('click', function() {
+
+
+//		console.log("click");
+//		countdownTimer.start();
+//		for (var i = 0; i < questionArray.length; i++) {
+//			console.log(i);
+
+//			$('.timer').html('<h3>'+countdownTimer.time + ' seconds remaining</h3>');
+//			$('.question').html(questionArray[i].question);
+//			while (countdownTimer != 0) {
+
+//			}
+		
+//	});
 //	$('#startButton').click(countdownTimer.start);
 
-}
+//}
 setup();
 
 

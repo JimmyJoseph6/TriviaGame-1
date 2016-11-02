@@ -1,0 +1,11 @@
+button {
+	width: 80%;
+}
+button.answerchoice {
+	display: none;
+}
+
+button.answerchoice:hover {
+	background-color: blue;
+	color: white;
+}
