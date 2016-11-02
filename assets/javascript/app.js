@@ -200,6 +200,7 @@ function setup() {
 	$('.question').append('<button id="startButton">Start</button>');
 	$('#startButton').on('click', function() {
 		$(this).hide();
+		countdownTimer.start();
 	 	loadQuestion(index);
 	});
 }		
