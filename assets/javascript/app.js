@@ -1,9 +1,9 @@
 $(document).ready(function() {
 	var index = 0;
 	var countdownTimer = {
-		time : 5,
+		time : 30,
 		reset: function() {
-			this.time = 5;
+			this.time = 30;
 			$('.timer').html('<h3>' + this.time + ' seconds remaining</h3>');
 		},
 		start: function() {
