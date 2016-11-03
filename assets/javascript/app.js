@@ -1,9 +1,9 @@
 $(document).ready(function() {
 	var index = 0;
 	var countdownTimer = {
-		time : 5,
+		time : 30,
 		reset: function() {
-			this.time = 5;
+			this.time = 30;
 			$('.timer').html('<h3>' + this.time + ' seconds remaining</h3>');
 		},
 		start: function() {
@@ -13,12 +13,16 @@ $(document).ready(function() {
 			clearInterval(counter);
 		},
 		count: function() {
-				this.time--;
-				console.log(this.time);
-				$('.timer').html(this.time);
-			if (this.time > 0) {
-				$('.timer').html('<h3>' + this.time + ' seconds remaining</h3>');
-//				(this).reset();
+				countdownTimer.time--;
+				console.log(countdownTimer.time);
+//				$('.timer').html(countdownTimer.time);
+			if (countdownTimer.time >= 0) {
+				$('.timer').html('<h3>' + countdownTimer.time + ' seconds remaining</h3>');
+			}
+			else {
+			index++;
+			countdownTimer.reset();
+			loadQuestion(index);
 			}
 		}
 	};
